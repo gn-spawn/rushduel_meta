@@ -22,9 +22,29 @@
 
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="bg-gray-100">
+    <header>
+      <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+            <div class="flex-shrink-0">
+              <%= link_to "MyApp", root_path, class: "text-xl font-bold text-gray-800" %>
+            </div>
+            <div class="flex items-center space-x-4">
+              <% if user_signed_in? %>
+                <%= button_to "Logout", destroy_user_session_path, data: { turbo_method: :delete}, class: "text-gray-800 hover:text-gray-500" %>
+                <%= link_to "Profile", edit_user_registration_path, class: "text-gray-800 hover:text-gray-500" %>
+              <% else %>
+                <%= link_to "Login", new_user_session_path, class: "text-gray-800 hover:text-gray-500" %>
+                <%= link_to "Sign up", new_user_registration_path, class: "text-gray-800 hover:text-gray-500" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <%= yield %>
+
   </body>
 </html>
